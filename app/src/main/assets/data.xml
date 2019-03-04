@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <request>
+        <fct>getfromtag</fct>
+        <tag>sad</tag>
+        <language>en</language>
+    </request>
+    <response>
+        <code>100</code>
+        <anwser>valid</anwser>
+        <time>0.04</time>
+    </response>
+    <infos>
+        <id><![CDATA[sad]]></id>
+        <radio_name><![CDATA[sad]]></radio_name>
+        <radio_type>tag</radio_type>
+    </infos>
+    <tracks>
+        <track>
+            <id>89637</id>
+            <title><![CDATA[Mourning Sad Morning]]></title>
+            <artist>
+                <mbid>111fbeab-6f67-4d9c-b682-acfd0840c68f</mbid>
+                <name><![CDATA[Free]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>1974</releasedate>
+            <genre>rock</genre>
+            <arousal>241000</arousal>
+            <valence>201903</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B000006YTK</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>146069</id>
+            <title><![CDATA[Living Next Door To Alice]]></title>
+            <artist>
+                <mbid>165e2705-abf7-4f1b-8971-4ceed8769c4d</mbid>
+                <name><![CDATA[Smokie]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>1977</releasedate>
+            <genre>rock</genre>
+            <arousal>620000</arousal>
+            <valence>118349</valence>
+            <popularity>85</popularity>
+            <originalid></originalid>
+            <ASIN>B0018LUELU</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>160486</id>
+            <title><![CDATA[Hjernen er alene]]></title>
+            <artist>
+                <mbid>00cf472e-7868-4343-ad2c-92dd13261d43</mbid>
+                <name><![CDATA[Seigmen]]></name>
+                <genre>metal</genre>
+            </artist>
+            <releasedate>2006</releasedate>
+            <genre>metal</genre>
+            <arousal>704000</arousal>
+            <valence>141762</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B002NEYZWU</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>46381</id>
+            <title><![CDATA[Hand In My Pocket]]></title>
+            <artist>
+                <mbid>4bdcee62-4902-4773-8cd1-e252e2e31225</mbid>
+                <name><![CDATA[Alanis Morissette]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>1995</releasedate>
+            <genre>rock</genre>
+            <arousal>602000</arousal>
+            <valence>141748</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B009G7WUME</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>12445</id>
+            <title><![CDATA[Hustler's story]]></title>
+            <artist>
+                <mbid>TemporaryMBID-10161</mbid>
+                <name><![CDATA[Loïc Nottet]]></name>
+                <genre>hip hop</genre>
+            </artist>
+            <releasedate>2005</releasedate>
+            <genre>hip hop</genre>
+            <arousal>479000</arousal>
+            <valence>58333</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>9957</id>
+            <title><![CDATA[Across the river]]></title>
+            <artist>
+                <mbid>6a67372b-a40c-4853-a70c-0a755d1aaacb</mbid>
+                <name><![CDATA[Pollyanna]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>2003</releasedate>
+            <genre>rock</genre>
+            <arousal>395000</arousal>
+            <valence>198319</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B0006A7W28</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>125172</id>
+            <title><![CDATA[Coming Home]]></title>
+            <artist>
+                <mbid>76f88542-fd2f-47a1-9be0-5d55df793aab</mbid>
+                <name><![CDATA[Garou]]></name>
+                <genre>vocal pop</genre>
+            </artist>
+            <releasedate>2008</releasedate>
+            <genre>vocal pop</genre>
+            <arousal>614000</arousal>
+            <valence>141748</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B0014SM9FQ</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>5022</id>
+            <title><![CDATA[Aux cyprès de la villa d'Este 2]]></title>
+            <artist>
+                <mbid>2cd475bb-1abd-40c4-9904-6d4b691c752c</mbid>
+                <name><![CDATA[Franz Liszt]]></name>
+                <genre>classical</genre>
+            </artist>
+            <releasedate>1899</releasedate>
+            <genre>classical</genre>
+            <arousal>225000</arousal>
+            <valence>58302</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B00AMF86YK</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>132914</id>
+            <title><![CDATA[Some Flowers Bloom Dead]]></title>
+            <artist>
+                <mbid>d9c90718-d54d-4ccf-a92e-37a5415ce299</mbid>
+                <name><![CDATA[The Wallflowers]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>2000</releasedate>
+            <genre>rock</genre>
+            <arousal>710000</arousal>
+            <valence>201963</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B008GTM2AI</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>50229</id>
+            <title><![CDATA[How Long]]></title>
+            <artist>
+                <mbid>04591295-6d94-45cb-b6c7-1ae17c6f380e</mbid>
+                <name><![CDATA[Lifehouse]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>2002</releasedate>
+            <genre>rock</genre>
+            <arousal>704000</arousal>
+            <valence>201962</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B00006JO9P</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>100242</id>
+            <title><![CDATA[Song of the dispossessed]]></title>
+            <artist>
+                <mbid>ccda046a-2674-4f7d-97e6-f23d6c156432</mbid>
+                <name><![CDATA[Dead Can Dance]]></name>
+                <genre>world</genre>
+            </artist>
+            <releasedate>1996</releasedate>
+            <genre>world</genre>
+            <arousal>367000</arousal>
+            <valence>121918</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B004GP0NQG</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>107646</id>
+            <title><![CDATA[The Jetset Life Is Gonna Kill You]]></title>
+            <artist>
+                <mbid>c07f0676-9143-4217-8a9f-4c26bd636f13</mbid>
+                <name><![CDATA[My Chemical Romance]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>2004</releasedate>
+            <genre>rock</genre>
+            <arousal>986490</arousal>
+            <valence>116608</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B0026A5TEY</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>4347</id>
+            <title><![CDATA[Don't let the sun go down on me]]></title>
+            <artist>
+                <mbid>32f2d6bd-c22b-42cf-a7bc-0c4b48cd2bcb</mbid>
+                <name><![CDATA[Joe Cocker]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>1992</releasedate>
+            <genre>rock</genre>
+            <arousal>479000</arousal>
+            <valence>198333</valence>
+            <popularity>60</popularity>
+            <originalid></originalid>
+            <ASIN>B000024A8T</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>68674</id>
+            <title><![CDATA[Un Cuaderno Lleno De Cuentos]]></title>
+            <artist>
+                <mbid>0932271a-c89e-4093-800a-75b015e2b0a3</mbid>
+                <name><![CDATA[Pastora]]></name>
+                <genre>pop</genre>
+            </artist>
+            <releasedate>2004</releasedate>
+            <genre>pop</genre>
+            <arousal>367000</arousal>
+            <valence>121918</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B0006NLN34</ASIN>
+            <favorite>0</favorite>
+        </track>
+        <track>
+            <id>105082</id>
+            <title><![CDATA[Lullaby]]></title>
+            <artist>
+                <mbid>98091205-c85e-49b0-954b-d84dab308138</mbid>
+                <name><![CDATA[The Spill Canvas]]></name>
+                <genre>rock</genre>
+            </artist>
+            <releasedate>2007</releasedate>
+            <genre>rock</genre>
+            <arousal>360000</arousal>
+            <valence>141718</valence>
+            <popularity>35</popularity>
+            <originalid></originalid>
+            <ASIN>B000TSJU04</ASIN>
+            <favorite>0</favorite>
+        </track>
+    </tracks>
+    <played>0</played>
+    <favonot></favonot>
+</root>
+

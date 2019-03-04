@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1014468483599",
+    "firebase_url": "https://cancion-musicplayer.firebaseio.com",
+    "project_id": "cancion-musicplayer",
+    "storage_bucket": "cancion-musicplayer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014468483599:android:4d9249ccc1923ca9",
+        "android_client_info": {
+          "package_name": "com.cancion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014468483599-h1stkhoqvaq1sd0j2dlk2k3jf043qm32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cancion",
+            "certificate_hash": "61bce44a6c12b99ed8be8b65741836e61bffd662"
+          }
+        },
+        {
+          "client_id": "1014468483599-svqjpp9r6cm02jq6a40v3feran2cp5tl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB6vW3T3ZJE3WGO5S_rFjAoKJKLUEo95A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014468483599-svqjpp9r6cm02jq6a40v3feran2cp5tl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

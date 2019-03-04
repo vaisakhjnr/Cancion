@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorAccent">@color/bright_red</color>
+
+    <color name="bright_blue">#0088FF</color>
+    <color name="bright_red">#FF4858</color>
+    <color name="bright_yellow">#FFBA00</color>
+    <color name="bright_green">#2FCC71</color>
+    <color name="bright_violet">#845CEE</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="space_cadet">#283149</color>
+    <color name="black">#000000</color>
+    <color name="grey">#aaaaaa</color>
+</resources>
