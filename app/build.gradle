@@ -29,6 +29,9 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/com/cancion'
+    }
 }
 
 dependencies {
@@ -40,11 +43,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-firestore:17.1.4'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-
-    //Third Party
-    implementation 'org.apache.httpcomponents:httpcore:4.4.9'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.5'
 }

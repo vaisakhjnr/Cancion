@@ -5,22 +5,45 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cancion.R;
 import com.cancion.model.Playlist;
+import com.cancion.ui.views.MatrixView;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlaylistAdapter extends ArrayAdapter<Playlist> {
+public class PlaylistAdapter extends BaseAdapter {
 
-    final Random rnd = new Random();
+    private final Random rnd = new Random();
+    private Context context;
+    private ArrayList<Playlist> currentPlaylists;
 
     public PlaylistAdapter(Context context, ArrayList<Playlist> playlists) {
-        super(context, 0, playlists);
+        this.context = context;
+        this.currentPlaylists = playlists;
+    }
+
+    @Override
+    public int getCount() {
+        try {
+            return currentPlaylists.size();
+        } catch (NullPointerException ignored) {
+        }
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return currentPlaylists.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
     @NonNull
@@ -29,17 +52,18 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.playlist_item, parent, false);
+            MatrixView m = (MatrixView) LayoutInflater.from(context).inflate(R.layout.playlist_item, parent, false);
             holder = new ViewHolder();
-            holder.titleTextView = convertView.findViewById(R.id.playlist_title);
-            holder.detailTextView = convertView.findViewById(R.id.playlist_details);
-            holder.circleImageView = convertView.findViewById(R.id.colored_circle);
+            holder.titleTextView = m.findViewById(R.id.playlist_title);
+            holder.detailTextView = m.findViewById(R.id.playlist_details);
+            holder.circleImageView = m.findViewById(R.id.colored_circle);
+            convertView = m;
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Playlist playlist = getItem(position);
+        Playlist playlist = (Playlist) getItem(position);
         holder.titleTextView.setText(playlist.playlistTitle);
         holder.detailTextView.setText(playlist.noOfTracks + " songs");
         int random = rnd.nextInt(5);
@@ -71,5 +95,10 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         private TextView titleTextView;
         private TextView detailTextView;
         private ImageView circleImageView;
+    }
+
+    public void updatePlaylists(ArrayList<Playlist> newDataSet) {
+        this.currentPlaylists = newDataSet;
+        notifyDataSetChanged();
     }
 }
