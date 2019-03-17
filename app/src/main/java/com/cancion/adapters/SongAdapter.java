@@ -2,6 +2,7 @@ package com.cancion.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +11,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cancion.R;
-import com.cancion.model.Playlist;
+import com.cancion.model.Song;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlaylistAdapter extends BaseAdapter {
+public class SongAdapter extends BaseAdapter {
 
     private final Random rnd = new Random();
     private Context context;
-    private ArrayList<Playlist> currentPlaylists;
+    private ArrayList<Song> currentSongs;
 
-    public PlaylistAdapter(Context context, ArrayList<Playlist> playlists) {
+    public SongAdapter(Context context, ArrayList<Song> songs) {
         this.context = context;
-        this.currentPlaylists = playlists;
+        this.currentSongs = songs;
     }
 
     @Override
     public int getCount() {
         try {
-            return currentPlaylists.size();
+            return currentSongs.size();
         } catch (NullPointerException ignored) {
         }
         return 0;
@@ -37,7 +38,7 @@ public class PlaylistAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return currentPlaylists.get(position);
+        return currentSongs.get(position);
     }
 
     @Override
@@ -51,19 +52,19 @@ public class PlaylistAdapter extends BaseAdapter {
 
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.playlist_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.song_item, parent, false);
             holder = new ViewHolder();
-            holder.titleTextView = convertView.findViewById(R.id.playlist_title);
-            holder.detailTextView = convertView.findViewById(R.id.playlist_details);
+            holder.titleTextView = convertView.findViewById(R.id.song_title);
             holder.circleImageView = convertView.findViewById(R.id.colored_circle);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Playlist playlist = (Playlist) getItem(position);
-        holder.titleTextView.setText(playlist.playlistTitle);
-        holder.detailTextView.setText(playlist.noOfTracks + " songs");
+        Song song = (Song) getItem(position);
+        holder.titleTextView.setText(song.songName);
+        Log.d("SongAdapter", song.songName);
+
         int random = rnd.nextInt(5);
         switch (random) {
             case 0:
@@ -89,14 +90,13 @@ public class PlaylistAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private static class ViewHolder {
-        private TextView titleTextView;
-        private TextView detailTextView;
-        private ImageView circleImageView;
+    public void updateSongs(ArrayList<Song> newDataSet) {
+        this.currentSongs = newDataSet;
+        notifyDataSetChanged();
     }
 
-    public void updatePlaylists(ArrayList<Playlist> newDataSet) {
-        this.currentPlaylists = newDataSet;
-        notifyDataSetChanged();
+    private static class ViewHolder {
+        private TextView titleTextView;
+        private ImageView circleImageView;
     }
 }
