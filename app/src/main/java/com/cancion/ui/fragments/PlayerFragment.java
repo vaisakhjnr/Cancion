@@ -59,7 +59,8 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 StorageReference songReference = storage.getReferenceFromUrl(songs.get(position).songUrl);
                 try {
-                    mediaPlayer.setDataSource(Objects.requireNonNull(getActivity()), Uri.parse(songReference.getDownloadUrl().toString()));
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(Objects.requireNonNull(getActivity()), Uri.parse(songs.get(position).songUrl));
                     mediaPlayer.prepare();
                     mediaPlayer.start();
                 } catch (IOException e) {

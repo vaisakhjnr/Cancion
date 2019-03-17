@@ -1,6 +1,7 @@
 package com.cancion.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -39,6 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private TextView currentMoodTextView;
     private ListView playlistsView;
+    private ImageView snappedPic;
 
     private ArrayList<Playlist> currentPlaylists;
     private PlaylistAdapter playlistAdapter;
@@ -48,6 +52,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Playlist> calm;
     private ArrayList<Playlist> angry;
     private ArrayList<Playlist> romantic;
+    private FirebaseStorage storage;
+    private MediaPlayer mediaPlayer;
 
     private ObservableInteger progress;
 
@@ -66,6 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         playlistsView = view.findViewById(R.id.playlists_listview);
         currentMoodTextView = view.findViewById(R.id.current_mood);
+        snappedPic = view.findViewById(R.id.snapped_pic);
 
         database = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -82,6 +89,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ((MainActivity) Objects.requireNonNull(getActivity())).onPlaylistSelected(currentPlaylists.get(position));
             }
         });
+
+        storage = FirebaseStorage.getInstance();
+        mediaPlayer = new MediaPlayer();
+
+        /*snappedPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StorageReference songReference = storage.getReferenceFromUrl("gs://cancion-musicplayer.appspot.com/calm/Glad You Came.mp3");
+                Toast.makeText(getActivity(), songReference.getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
+                try {
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(Objects.requireNonNull(getActivity()), Uri.parse(songReference.getDownloadUrl().toString()));
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(getActivity(), "IOException", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
 
         currentMoodTextView.setOnClickListener(this);
         currentMoodTextView.addTextChangedListener(new TextWatcher() {
@@ -171,11 +198,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void fetchPlaylists() {
-        String calmPlaylistPath = "calm_playlists";
-        String happyPlaylistPath = "happy_playlists";
-        String sadPlaylistPath = "sad_playlists";
-        String angryPlaylistPath = "angry_playlists";
-        String romanticPlaylistPath = "romantic_playlists";
+        final String calmPlaylistPath = "calm_playlists";
+        final String happyPlaylistPath = "happy_playlists";
+        final String sadPlaylistPath = "sad_playlists";
+        final String angryPlaylistPath = "angry_playlists";
+        final String romanticPlaylistPath = "romantic_playlists";
 
         CollectionReference cdb = database.collection(calmPlaylistPath);
 
@@ -186,7 +213,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     calm = new ArrayList<>();
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Playlist cp = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        document.getReference().getFirestore().collection("songs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        CollectionReference cdbi = database.collection(calmPlaylistPath).document(document.getId()).collection("songs");
+                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -215,7 +243,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     angry = new ArrayList<>();
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Playlist ap = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        document.getReference().getFirestore().collection("songs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        CollectionReference cdbi = database.collection(angryPlaylistPath).document(document.getId()).collection("songs");
+                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -244,7 +273,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     happy = new ArrayList<>();
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Playlist hp = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        document.getReference().getFirestore().collection("songs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        CollectionReference cdbi = database.collection(happyPlaylistPath).document(document.getId()).collection("songs");
+                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -273,7 +303,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     sad = new ArrayList<>();
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Playlist sp = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        document.getReference().getFirestore().collection("songs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        CollectionReference cdbi = database.collection(sadPlaylistPath).document(document.getId()).collection("songs");
+                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -302,7 +333,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     romantic = new ArrayList<>();
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Playlist rp = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        document.getReference().getFirestore().collection("songs").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        CollectionReference cdbi = database.collection(romanticPlaylistPath).document(document.getId()).collection("songs");
+                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
