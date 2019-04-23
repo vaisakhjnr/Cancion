@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true"
+        app:cameraFacing="front"
+        app:cameraFlash="off"
+        app:cameraPictureSizeAspectRatio="1:1" />
+
+    <TextView
+        android:id="@+id/snap_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/camera"
+        android:background="@drawable/red_rect"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:text="Take Pic"
+        android:textColor="#fff"
+        android:textSize="22sp" />
+
+</RelativeLayout>

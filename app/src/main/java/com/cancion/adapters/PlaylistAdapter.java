@@ -1,7 +1,6 @@
 package com.cancion.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import com.cancion.model.Playlist;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import androidx.annotation.NonNull;
 
 public class PlaylistAdapter extends BaseAdapter {
 

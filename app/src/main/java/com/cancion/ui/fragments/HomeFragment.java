@@ -3,12 +3,8 @@ package com.cancion.ui.fragments;
 import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +31,10 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -146,7 +146,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         progress.setOnIntegerChangeListener(new OnIntegerChangeListener() {
             @Override
             public void onIntegerChanged(int newValue) {
-                Log.d(TAG, "Progress: " + newValue);
                 switch (newValue) {
                     case 0:
                         fetched = false;
@@ -166,7 +165,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         break;
                     case 5:
                         fetched = true;
-                        currentMoodTextView.setText("Loaded. Tap to continue");
+                        currentMoodTextView.setText("Loaded");
+                        currentMoodTextView.setText(MainActivity.currentEmotion);
                         break;
                 }
             }
@@ -178,7 +178,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        /*switch (v.getId()) {
             case R.id.current_mood:
                 if (fetched) {
                     if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Sad"))
@@ -194,7 +194,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     else currentMoodTextView.setText("Happy");
                 } else currentMoodTextView.setText("Loading");
                 break;
-        }
+        }*/
     }
 
     public void fetchPlaylists() {
@@ -221,11 +221,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     ArrayList<Song> s = new ArrayList<>();
                                     for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
                                         s.add(new Song(song.getString("name"), song.getString("url")));
-                                        Log.d(TAG, "song: " + song.getString("name"));
                                     }
                                     cp.songs = s;
                                     calm.add(cp);
-                                } else Log.d(TAG, "failed");
+                                }
                             }
                         });
                     }
@@ -251,7 +250,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     ArrayList<Song> s = new ArrayList<>();
                                     for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
                                         s.add(new Song(song.getString("name"), song.getString("url")));
-                                        Log.d(TAG, "song: " + song.getString("name"));
                                     }
                                     ap.songs = s;
                                     angry.add(ap);
@@ -281,7 +279,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     ArrayList<Song> s = new ArrayList<>();
                                     for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
                                         s.add(new Song(song.getString("name"), song.getString("url")));
-                                        Log.d(TAG, "song: " + song.getString("name"));
                                     }
                                     hp.songs = s;
                                     happy.add(hp);
@@ -311,7 +308,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     ArrayList<Song> s = new ArrayList<>();
                                     for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
                                         s.add(new Song(song.getString("name"), song.getString("url")));
-                                        Log.d(TAG, "song: " + song.getString("name"));
                                     }
                                     sp.songs = s;
                                     sad.add(sp);
@@ -341,7 +337,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     ArrayList<Song> s = new ArrayList<>();
                                     for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
                                         s.add(new Song(song.getString("name"), song.getString("url")));
-                                        Log.d(TAG, "song: " + song.getString("name"));
                                     }
                                     rp.songs = s;
                                     romantic.add(rp);

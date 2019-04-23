@@ -1,7 +1,6 @@
 package com.cancion.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,8 @@ import com.cancion.model.Song;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import androidx.annotation.NonNull;
 
 public class SongAdapter extends BaseAdapter {
 

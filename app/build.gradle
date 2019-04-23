@@ -12,6 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 28
         renderscriptSupportModeEnabled true
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -43,6 +46,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Firebase
+    implementation 'com.otaliastudios:cameraview:2.0.0-beta04'
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation 'com.google.firebase:firebase-ml-model-interpreter:18.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
