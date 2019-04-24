@@ -8,8 +8,12 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.cancion.R;
@@ -46,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Playlist> playlists = new ArrayList<>();
 
-    public static String currentEmotion = "none";
+    public String currentEmotion = null;
     public Playlist currentPlaylist;
 
     private HomeFragment homeFragment;
     private PlayerFragment playerFragment;
     private Bitmap bitmap;
+    public Bitmap rawColorBitmap;
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -60,12 +65,75 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseModelInputOutputOptions inputOutputOptions;
     private ProgressDialog progressDialog;
 
+    public boolean inPlayerFragment = false;
+    public boolean inHomeFragment = false;
+    public boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        playerFragment.mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            playerFragment.mediaPlayer.stop();
+            playerFragment.mediaPlayer.reset();
+            playerFragment.animationView.setVisibility(View.GONE);
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            if (inPlayerFragment) {
+                playerFragment.mediaPlayer.start();
+                playerFragment.animationView.setVisibility(View.VISIBLE);
+            } else {
+                playerFragment.mediaPlayer.reset();
+                playerFragment.animationView.setVisibility(View.GONE);
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (inPlayerFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frag_container, homeFragment).commit();
+            playerFragment.mediaPlayer.stop();
+            inPlayerFragment = false;
+        } else if (inHomeFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frag_container, cameraFragment).commit();
+            inHomeFragment = false;
+        } else if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        } else {
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
+    }
+
     public void onPlaylistSelected(Playlist playlist) {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frag_container, playerFragment).commit();
         this.currentPlaylist = playlist;
     }
 
     public void bitmapReady(Bitmap bm) {
+        rawColorBitmap = bm;
         bitmap = Bitmap.createScaledBitmap(bm, 160, 160, false);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Processing Image");
@@ -94,19 +162,15 @@ public class MainActivity extends AppCompatActivity {
                                         percentages[i] = Float.parseFloat(fl);
                                     }
                                     if (percentages[0] > percentages[3] && percentages[0] > percentages[4] && percentages[0] > percentages[6]) {
-                                        currentEmotion = "angry";
-                                        Toast.makeText(MainActivity.this, currentEmotion, Toast.LENGTH_SHORT).show();
+                                        currentEmotion = "Angry";
                                     } else if (percentages[3] > percentages[0] && percentages[3] > percentages[4] && percentages[3] > percentages[6]) {
-                                        currentEmotion = "happy";
-                                        Toast.makeText(MainActivity.this, currentEmotion, Toast.LENGTH_SHORT).show();
+                                        currentEmotion = "Happy";
                                     } else if (percentages[4] > percentages[0] && percentages[4] > percentages[3] && percentages[4] > percentages[6]) {
-                                        currentEmotion = "sad";
-                                        Toast.makeText(MainActivity.this, currentEmotion, Toast.LENGTH_SHORT).show();
+                                        currentEmotion = "Sad";
                                     } else if (percentages[6] > percentages[0] && percentages[6] > percentages[4] && percentages[6] > percentages[3]) {
-                                        currentEmotion = "happy";
-                                        Toast.makeText(MainActivity.this, currentEmotion, Toast.LENGTH_SHORT).show();
+                                        currentEmotion = "Calm";
                                     } else {
-                                        Toast.makeText(MainActivity.this, "Unknown Emotion", Toast.LENGTH_SHORT).show();
+                                        currentEmotion = "None";
                                     }
                                     progressDialog.dismiss();
                                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frag_container, homeFragment).commit();
@@ -130,6 +194,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window window = getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.WHITE);
+        }
 
         mAuth = FirebaseAuth.getInstance();
         mAuth.signInAnonymously()

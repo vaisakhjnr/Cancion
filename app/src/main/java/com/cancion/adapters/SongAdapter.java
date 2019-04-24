@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cancion.R;
@@ -56,7 +55,6 @@ public class SongAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.song_item, parent, false);
             holder = new ViewHolder();
             holder.titleTextView = convertView.findViewById(R.id.song_title);
-            holder.circleImageView = convertView.findViewById(R.id.colored_circle);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,22 +67,22 @@ public class SongAdapter extends BaseAdapter {
         int random = rnd.nextInt(5);
         switch (random) {
             case 0:
-                holder.circleImageView.setImageResource(R.drawable.blue_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.blue_rect));
                 break;
             case 1:
-                holder.circleImageView.setImageResource(R.drawable.green_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.green_rect));
                 break;
             case 2:
-                holder.circleImageView.setImageResource(R.drawable.red_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.red_rect));
                 break;
             case 3:
-                holder.circleImageView.setImageResource(R.drawable.violet_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.violet_rect));
                 break;
             case 4:
-                holder.circleImageView.setImageResource(R.drawable.yellow_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.yellow_rect));
                 break;
             default:
-                holder.circleImageView.setImageResource(R.drawable.blue_circle);
+                holder.titleTextView.setBackground(context.getDrawable(R.drawable.blue_rect));
                 break;
         }
 
@@ -98,6 +96,5 @@ public class SongAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         private TextView titleTextView;
-        private ImageView circleImageView;
     }
 }

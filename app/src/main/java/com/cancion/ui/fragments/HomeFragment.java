@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +34,7 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private TextView currentMoodTextView;
     private ListView playlistsView;
-    private ImageView snappedPic;
+    private CircleImageView snappedPic;
 
     private ArrayList<Playlist> currentPlaylists;
     private PlaylistAdapter playlistAdapter;
@@ -62,13 +62,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         playlistsView = view.findViewById(R.id.playlists_listview);
         currentMoodTextView = view.findViewById(R.id.current_mood);
@@ -120,16 +115,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (fetched) {
-                    if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Calm"))
+                    if (currentMoodTextView.getText().toString().trim().contains("Calm"))
                         currentPlaylists = calm;
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Happy"))
+                    else if (currentMoodTextView.getText().toString().trim().contains("Happy"))
                         currentPlaylists = happy;
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Sad"))
+                    else if (currentMoodTextView.getText().toString().trim().contains("Sad"))
                         currentPlaylists = sad;
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Angry"))
+                    else if (currentMoodTextView.getText().toString().trim().contains("Angry"))
                         currentPlaylists = angry;
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Romantic"))
-                        currentPlaylists = romantic;
+                    else currentPlaylists = null;
 
                     ((MainActivity) Objects.requireNonNull(getActivity())).playlists = currentPlaylists;
                     playlistAdapter.updatePlaylists(currentPlaylists);
@@ -150,6 +144,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     case 0:
                         fetched = false;
                         currentMoodTextView.setText("Loading");
+                        currentPlaylists = null;
+                        ((MainActivity) Objects.requireNonNull(getActivity())).playlists = currentPlaylists;
+                        playlistAdapter.updatePlaylists(currentPlaylists);
                         break;
                     case 1:
                         fetched = false;
@@ -161,18 +158,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         fetched = false;
                         break;
                     case 4:
-                        fetched = false;
-                        break;
-                    case 5:
                         fetched = true;
-                        currentMoodTextView.setText("Loaded");
-                        currentMoodTextView.setText(MainActivity.currentEmotion);
+                        if (((MainActivity) getActivity()).currentEmotion.trim().equalsIgnoreCase("none"))
+                            currentMoodTextView.setText("You look Emotionless");
+                        else
+                            currentMoodTextView.setText("You look " + ((MainActivity) getActivity()).currentEmotion);
+                        if (((MainActivity) getActivity()).currentEmotion.trim().contains("Calm"))
+                            currentPlaylists = calm;
+                        else if (((MainActivity) getActivity()).currentEmotion.trim().contains("Happy"))
+                            currentPlaylists = happy;
+                        else if (((MainActivity) getActivity()).currentEmotion.trim().contains("Sad"))
+                            currentPlaylists = sad;
+                        else if (((MainActivity) getActivity()).currentEmotion.trim().contains("Angry"))
+                            currentPlaylists = angry;
+                        else if (((MainActivity) getActivity()).currentEmotion.trim().contains("Romantic"))
+                            currentPlaylists = romantic;
+
+                        ((MainActivity) Objects.requireNonNull(getActivity())).playlists = currentPlaylists;
+                        playlistAdapter.updatePlaylists(currentPlaylists);
+
+                        snappedPic.setImageBitmap(((MainActivity) getActivity()).rawColorBitmap);
                         break;
                 }
             }
         });
-        progress.set(0);
+        return view;
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         fetchPlaylists();
+        progress.set(0);
+        ((MainActivity) getActivity()).inHomeFragment = true;
     }
 
     @SuppressLint("SetTextI18n")
@@ -181,17 +200,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         /*switch (v.getId()) {
             case R.id.current_mood:
                 if (fetched) {
-                    if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Sad"))
-                        currentMoodTextView.setText("Happy");
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Happy"))
-                        currentMoodTextView.setText("Calm");
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Calm"))
-                        currentMoodTextView.setText("Angry");
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Angry"))
-                        currentMoodTextView.setText("Romantic");
-                    else if (currentMoodTextView.getText().toString().trim().equalsIgnoreCase("Romantic"))
-                        currentMoodTextView.setText("Sad");
-                    else currentMoodTextView.setText("Happy");
+                    if (currentMoodTextView.getText().toString().trim().contains("Sad"))
+                        currentMoodTextView.setText("You look Sad");
+                    else if (currentMoodTextView.getText().toString().trim().contains("Happy"))
+                        currentMoodTextView.setText("You look Happy");
+                    else if (currentMoodTextView.getText().toString().trim().contains("Calm"))
+                        currentMoodTextView.setText("You look Calm");
+                    else if (currentMoodTextView.getText().toString().trim().contains("Angry"))
+                        currentMoodTextView.setText("You look Angry");
+                    else currentMoodTextView.setText("You look Emotionless");
                 } else currentMoodTextView.setText("Loading");
                 break;
         }*/
@@ -202,7 +219,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final String happyPlaylistPath = "happy_playlists";
         final String sadPlaylistPath = "sad_playlists";
         final String angryPlaylistPath = "angry_playlists";
-        final String romanticPlaylistPath = "romantic_playlists";
 
         CollectionReference cdb = database.collection(calmPlaylistPath);
 
@@ -224,11 +240,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     }
                                     cp.songs = s;
                                     calm.add(cp);
+                                    progress.set(progress.get() + 1);
                                 }
                             }
                         });
                     }
-                    progress.set(progress.get() + 1);
                 }
             }
         });
@@ -253,11 +269,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     }
                                     ap.songs = s;
                                     angry.add(ap);
+                                    progress.set(progress.get() + 1);
                                 }
                             }
                         });
                     }
-                    progress.set(progress.get() + 1);
                 }
             }
         });
@@ -282,11 +298,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     }
                                     hp.songs = s;
                                     happy.add(hp);
+                                    progress.set(progress.get() + 1);
                                 }
                             }
                         });
                     }
-                    progress.set(progress.get() + 1);
                 }
             }
         });
@@ -311,40 +327,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     }
                                     sp.songs = s;
                                     sad.add(sp);
+                                    progress.set(progress.get() + 1);
                                 }
                             }
                         });
                     }
-                    progress.set(progress.get() + 1);
-                }
-            }
-        });
-
-        CollectionReference rdb = database.collection(romanticPlaylistPath);
-
-        rdb.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    romantic = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        final Playlist rp = new Playlist(Objects.requireNonNull(document.getDouble("count")).intValue(), document.getString("name"));
-                        CollectionReference cdbi = database.collection(romanticPlaylistPath).document(document.getId()).collection("songs");
-                        cdbi.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    ArrayList<Song> s = new ArrayList<>();
-                                    for (QueryDocumentSnapshot song : Objects.requireNonNull(task.getResult())) {
-                                        s.add(new Song(song.getString("name"), song.getString("url")));
-                                    }
-                                    rp.songs = s;
-                                    romantic.add(rp);
-                                }
-                            }
-                        });
-                    }
-                    progress.set(progress.get() + 1);
                 }
             }
         });

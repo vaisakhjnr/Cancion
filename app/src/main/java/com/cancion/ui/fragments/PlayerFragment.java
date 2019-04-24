@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.cancion.R;
 import com.cancion.adapters.SongAdapter;
 import com.cancion.model.Song;
@@ -33,7 +34,8 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Song> songs;
     private SongAdapter songAdapter;
     private FirebaseStorage storage;
-    private MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
+    public LottieAnimationView animationView;
 
     @Override
     public void onClick(View v) {
@@ -51,6 +53,7 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         songsListsView = view.findViewById(R.id.songs_listview);
+        animationView = view.findViewById(R.id.animation_view);
 
         storage = FirebaseStorage.getInstance();
         mediaPlayer = new MediaPlayer();
@@ -64,6 +67,7 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
                     mediaPlayer.setDataSource(Objects.requireNonNull(getActivity()), Uri.parse(songs.get(position).songUrl));
                     mediaPlayer.prepare();
                     mediaPlayer.start();
+                    animationView.setVisibility(View.VISIBLE);
                 } catch (IOException e) {
                     Toast.makeText(getActivity(), "IOException", Toast.LENGTH_SHORT).show();
                 }
@@ -74,5 +78,7 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
         songs = ((MainActivity) Objects.requireNonNull(getActivity())).currentPlaylist.songs;
         songAdapter = new SongAdapter(getActivity(), songs);
         songsListsView.setAdapter(songAdapter);
+
+        ((MainActivity) getActivity()).inPlayerFragment = true;
     }
 }

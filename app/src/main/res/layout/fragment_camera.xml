@@ -4,10 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="music_anim.json"
+        app:lottie_loop="true"
+        app:lottie_scale="4" />
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/camera"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/lato_black"
+        android:gravity="center|start"
+        android:text="Cancion"
+        android:textColor="#000"
+        android:textSize="32sp" />
+
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:keepScreenOn="true"
         app:cameraFacing="front"
         app:cameraFlash="off"
@@ -17,8 +46,11 @@
         android:id="@+id/snap_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/camera"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/red_rect"
+        android:fontFamily="@font/lato"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:text="Take Pic"
