@@ -88,23 +88,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         storage = FirebaseStorage.getInstance();
         mediaPlayer = new MediaPlayer();
 
-        /*snappedPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StorageReference songReference = storage.getReferenceFromUrl("gs://cancion-musicplayer.appspot.com/calm/Glad You Came.mp3");
-                Toast.makeText(getActivity(), songReference.getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
-                try {
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(Objects.requireNonNull(getActivity()), Uri.parse(songReference.getDownloadUrl().toString()));
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    //Toast.makeText(getActivity(), "IOException", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
-
         currentMoodTextView.setOnClickListener(this);
         currentMoodTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -160,7 +143,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     case 4:
                         fetched = true;
                         if (((MainActivity) getActivity()).currentEmotion.trim().equalsIgnoreCase("none"))
-                            currentMoodTextView.setText("You look Emotionless");
+                            currentMoodTextView.setText("You look Calm");
                         else
                             currentMoodTextView.setText("You look " + ((MainActivity) getActivity()).currentEmotion);
                         if (((MainActivity) getActivity()).currentEmotion.trim().contains("Calm"))
