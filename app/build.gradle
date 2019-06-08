@@ -56,4 +56,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation project(':openCVLibrary343')
     implementation files('libs/FaceCropper-library.jar')
+    implementation files('libs/FaceCropper-library.jar')
 }

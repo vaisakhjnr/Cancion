@@ -1,24 +1,24 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-6:12
+ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
+INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:1-5:44
 	package
-		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:3:7-27
+		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:3:5-25
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:5:7-34
+		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:5:5-32
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:4:7-33
+		ADDED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml:4:5-31
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\vaisakhjnr\StudioProjects\Cancion\openCVLibrary343\src\main\AndroidManifest.xml
 uses-sdk
