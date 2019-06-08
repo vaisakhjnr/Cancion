@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cancion.R;
 import com.cancion.model.Playlist;
 import com.cancion.ui.fragments.CameraFragment;
@@ -48,8 +51,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import cat.lafosca.facecropper.FaceCropper;
 
 public class MainActivity extends AppCompatActivity {
@@ -218,20 +219,20 @@ public class MainActivity extends AppCompatActivity {
                                     float[][] output = result.getOutput(0);
                                     float[] probabilities = output[0];
                                     float[] percentages = probabilities;
-                                    String[] labels = {"angry", "disgust", "fear", "happy", "sad", "surprise", "neutral"};
+                                    String[] labels = {"angry", "happy", "sad", "neutral"};
                                     for (int i = 0; i < probabilities.length; i++) {
                                         String label = labels[i];
                                         String fl = String.format("%1.4f", probabilities[i]);
                                         Log.i("MLKit", String.format("%s: %1.4f", label, probabilities[i]));
                                         percentages[i] = Float.parseFloat(fl);
                                     }
-                                    if (percentages[0] > percentages[3] && percentages[0] > percentages[4] && percentages[0] > percentages[6]) {
+                                    if (percentages[0] > percentages[1] && percentages[0] > percentages[2] && percentages[0] > percentages[3]) {
                                         currentEmotion = "Angry";
-                                    } else if (percentages[3] > percentages[0] && percentages[3] > percentages[4] && percentages[3] > percentages[6]) {
+                                    } else if (percentages[1] > percentages[0] && percentages[1] > percentages[2] && percentages[1] > percentages[3]) {
                                         currentEmotion = "Happy";
-                                    } else if (percentages[4] > percentages[0] && percentages[4] > percentages[3] && percentages[4] > percentages[6]) {
+                                    } else if (percentages[2] > percentages[0] && percentages[2] > percentages[1] && percentages[2] > percentages[3]) {
                                         currentEmotion = "Sad";
-                                    } else if (percentages[6] > percentages[0] && percentages[6] > percentages[4] && percentages[6] > percentages[3]) {
+                                    } else if (percentages[3] > percentages[0] && percentages[3] > percentages[1] && percentages[3] > percentages[2]) {
                                         currentEmotion = "Calm";
                                     } else {
                                         currentEmotion = "None";

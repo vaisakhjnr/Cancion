@@ -18,7 +18,7 @@ sess = tf.Session(config=config)
 keras.backend.set_session(sess)
 # ------------------------------
 # variables
-num_classes = 7  # angry, disgust, fear, happy, sad, surprise, neutral
+num_classes = 4  # angry, happy, sad, neutral
 batch_size = 256
 epochs = 5
 
@@ -136,7 +136,7 @@ print('Test accuracy:', 100*score[1])
 # ------------------------------
 # function for drawing bar chart for emotion preditions
 def emotion_analysis(emotions):
-    objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
+    objects = ('angry', 'happy', 'sad', 'neutral')
     y_pos = np.arange(len(objects))
 
     plt.bar(y_pos, emotions, align='center', alpha=0.5)
